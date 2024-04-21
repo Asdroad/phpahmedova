@@ -145,6 +145,7 @@
         <div class="col-md-auto text-center">
             <img src="img/iconflutter.svg" alt="Icon" style="max-width: 150px;">
         </div>
+    </footer>
 </main>
 </body>
 </html>
