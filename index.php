@@ -12,6 +12,7 @@
 <body>
 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none me-3">
+        <img src="img/iconflutter.svg" alt="Icon" style="max-width: 30px;">
         <span class="fs-4">SilentSonics</span>
     </a>
 
@@ -109,9 +110,9 @@
             </div>
         </div>
     </div>
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <footer class="pt-4 my-md-10 pt-md-10 border-top">
         <div class="row">
-            <div class="col-6 col-md offset-md-2">
+            <div class="col-6 col-md offset-md-2"> <!-- Добавлен класс offset-md-2 для создания отступа по бокам -->
                 <h5>Features</h5>
                 <ul class="list-unstyled text-small">
                     <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
@@ -141,7 +142,26 @@
                 </ul>
             </div>
         </div>
-    </footer>
+        <div class="col-md-auto text-center">
+            <img src="img/iconflutter.svg" alt="Icon" style="max-width: 150px;">
+        </div>
 </main>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+<!--карта -->
+<!--            <div class="col-6 col-md offset-md-2">-->
+<!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2243.0711752419534!2d49.12359147682794!3d55.79200198897123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x415ead13c38db643%3A0x9563f6c8fe759e12!2z0YPQuy4g0J_Rg9GI0LrQuNC90LAsIDMyLCDQmtCw0LfQsNC90YwsINCg0LXRgdC_LiDQotCw0YLQsNGA0YHRgtCw0L0sIDQyMDAxNQ!5e0!3m2!1sru!2sru!4v1713714195515!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+<!--            </div>-->
+
+<!--иконка-->
+
