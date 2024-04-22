@@ -18,9 +18,9 @@
 
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto" style="font-family: Helvetica, sans-serif;">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Главная</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Контакты</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Поддержка</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Реферальная система</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="contacts.php">Контакты</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="support.php">Поддержка</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная система</a>
     </nav>
     <a class="m3-3 btn btn-outline-primary" href="#">Войти</a>
 </div>
@@ -159,10 +159,5 @@
 
 
 
-<!--карта -->
-<!--            <div class="col-6 col-md offset-md-2">-->
-<!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2243.0711752419534!2d49.12359147682794!3d55.79200198897123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x415ead13c38db643%3A0x9563f6c8fe759e12!2z0YPQuy4g0J_Rg9GI0LrQuNC90LAsIDMyLCDQmtCw0LfQsNC90YwsINCg0LXRgdC_LiDQotCw0YLQsNGA0YHRgtCw0L0sIDQyMDAxNQ!5e0!3m2!1sru!2sru!4v1713714195515!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
-<!--            </div>-->
 
-<!--иконка-->
 
