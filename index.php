@@ -12,7 +12,7 @@
 <body>
 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none me-3">
-        <img src="img/iconflutter.svg" alt="Icon" style="max-width: 30px;">
+        <img src="img/iconflutter.svg" alt="Icon" style="max-width: 30px; margin: 10px"   >
         <span class="fs-4">SilentSonics</span>
     </a>
 
