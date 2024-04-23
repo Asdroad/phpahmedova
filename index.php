@@ -16,13 +16,14 @@
         <span class="fs-4">SilentSonics</span>
     </a>
 
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto" style="font-family: Helvetica, sans-serif;">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="index.php">Главная</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="contacts.php">Контакты</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="support.php">Поддержка</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная система</a>
+    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center" style="font-family: Helvetica, sans-serif;">
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="index.php">Главная</a>
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="contacts.php">Контакты</a>
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="support.php">Поддержка</a>
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная система</a>
+        <img src="img/basket.svg" alt="basket" style="max-width: 25px;">
     </nav>
-    <a class="m3-3 btn btn-outline-primary" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</a>
+    <a class="mx-2 btn btn-outline-primary" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</a>
 </div>
 
 <main>
