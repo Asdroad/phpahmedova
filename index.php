@@ -17,12 +17,12 @@
     </a>
 
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto" style="font-family: Helvetica, sans-serif;">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Главная</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="index.php">Главная</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="contacts.php">Контакты</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="support.php">Поддержка</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная система</a>
     </nav>
-    <a class="m3-3 btn btn-outline-primary" href="#">Войти</a>
+    <a class="m3-3 btn btn-outline-primary" href="regsystem.php">Войти</a>
 </div>
 
 <main>
