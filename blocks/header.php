@@ -47,10 +47,9 @@
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="support.php">Поддержка</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная система</a>
     </nav>
-    <a class="m3-3 btn btn-outline-primary" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</a>
+    <a class="m3-3 btn btn-outline-primary" href="#loginModal" data-bs-toggle="modal">Войти</a>
 </div>
 
-<!-- Подключение необходимых скриптов Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
