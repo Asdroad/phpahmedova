@@ -1,17 +1,30 @@
 <?php
 
-    $email = $_POST['email'];
-    $message = $_POST['message'];
+$errors = [];
 
-    $error = '';
-    if(trim($message)== '')
-        $error='Введите ваш email';
-    else if(trim($message)=='')
-        $error = 'Введите само сообщение';
-    else if(trim($message)<10)
-        $error= 'Сообщение должно быть больше 10 символов';
+// Получаем данные из формы
+$email = $_POST['email'];
+$message = $_POST['message'];
 
-    if($error!=''){
-        echo $error;
-        exit();
+// Проверяем корректность email
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'Некорректный email';
+}
+
+// Проверяем, было ли введено сообщение
+if (empty($message)) {
+    $errors[] = 'Введите сообщение';
+} elseif (strlen($message) < 10) {
+    $errors[] = 'Сообщение должно содержать не менее 10 символов';
+}
+
+// Если есть ошибки, выводим их
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo $error . "<br>";
     }
+} else {
+    // Если ошибок нет, можно обрабатывать данные дальше, например, сохранить в базу данных или отправить по электронной почте
+    echo "Данные успешно отправлены!";
+}
+?>

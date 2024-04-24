@@ -46,7 +46,7 @@
                         <li>256GB SSD</li>
                         <li>1 день в подарок в качестве тестового времени </li>
                     </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-primary">Попробовать</button>
+                    <button type="button" class="w-100 btn btn-lg btn-primary" onclick="addToCart('1', 'MacBook Pro (13 дюймов, M2, 2022 г.)', 'Apple M2 chip, 8-ядерный процессор, 6 производительных ядра и 6 энергоэффективных ядра, 10-core GPU, 16GB оперативной памяти, 256GB SSD')">Попробовать</button>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                         <li>256GB SSD</li>
                         <li>1 день в подарок в качестве тестового времени </li>
                     </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-primary">Попробовать</button>
+                    <button type="button" class="w-100 btn btn-lg btn-primary" onclick="addToCart('2', 'MacBook Pro (14 дюймов, ноябрь 2023 г.)', 'Apple M3 chip, 8-ядерный процессор, 4 производительных ядра и 4 энергоэффективных ядра, 10-core GPU, 16GB оперативной памяти, 256GB SSD')">Попробовать</button>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
                         <li>1TB SSD</li>
                         <li>12 часов  в подарок в качестве тестового времени </li>
                     </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-primary">Попробовать</button>
+                    <button type="button" class="w-100 btn btn-lg btn-primary" onclick="addToCart('3', 'MacBook Pro (16 дюймов, ноябрь 2023 г.)', 'Apple M3 Pro chip, 12-ядерный процессор, 6 производительных ядра и 6 энергоэффективных ядра, 18-core GPU, 36GB оперативной памяти, 1TB SSD')">Попробовать</button>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                         <li>256GB SSD</li>
                         <li>1 день в подарок в качестве тестового времени </li>
                     </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-primary">Попробовать</button>
+                    <button type="button" class="w-100 btn btn-lg btn-primary" onclick="addToCart('4', 'MacBook Air (13 дюймов, ноябрь 2020 г.)', 'Apple M1 chip, 8-ядерный процессор, 4 производительных ядра и 4 энергоэффективных ядра, 8-core GPU, 8GB оперативной памяти, 256GB SSD')">Попробовать</button>
                 </div>
             </div>
         </div>
@@ -175,5 +175,25 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function addToCart(itemId, itemName, itemDescription) {
+        // Отправляем AJAX-запрос на сервер
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'add_to_cart.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Обновляем интерфейс, если добавление прошло успешно
+                    alert('Товар успешно добавлен в корзину!');
+                } else {
+                    alert('Произошла ошибка при добавлении товара в корзину.');
+                }
+            }
+        };
+        xhr.send('itemId=' + itemId + '&itemName=' + encodeURIComponent(itemName) + '&itemDescription=' + encodeURIComponent(itemDescription));
+    }
+</script>
 </body>
 </html>
