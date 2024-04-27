@@ -1,102 +1,80 @@
-<?php
-// Начало сессии
-session_start();
-
-header("Cache-Control: no-cache, must-revalidate");
-header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-
-// Функция для добавления товара в корзину
-function addToCart($itemId, $itemName, $itemDescription) {
-    // Проверяем, существует ли массив корзины в сессии, если нет, создаем его
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['itemId'])) {
-        addToCart($_POST['itemId'], $_POST['itemName'], $_POST['itemDescription']);
-    }
-    // Добавляем товар в корзину
-    $_SESSION['cartItems'][] = array(
-        "id" => $itemId,
-        "name" => $itemName,
-        "description" => $itemDescription
-    );
-}
-
-// Функция для удаления товара из корзины
-function removeFromCart($itemId) {
-    // Проверяем, существует ли массив корзины в сессии
-    if (isset($_SESSION['cartItems'])) {
-        // Ищем индекс товара в корзине по его id
-        $index = array_search($itemId, array_column($_SESSION['cartItems'], 'id'));
-        // Если товар найден, удаляем его из корзины
-        if ($index !== false) {
-            unset($_SESSION['cartItems'][$index]);
-            // Сбрасываем ключи массива
-            $_SESSION['cartItems'] = array_values($_SESSION['cartItems']);
-        }
-    }
-}
-
-// Пример добавления товара в корзину
-addToCart(1, "Товарымывымыв 1", "Описание товара 1");
-addToCart(2, "Товар 2", "Описание товара 2");
-addToCart(3, "Товар 3", "Описание товара 3");
-
-// Обработка запроса на удаление товара из корзины
-if (isset($_POST['removeItemId'])) {
-    removeFromCart($_POST['removeItemId']);
-    // Переадресация обратно на страницу корзины для обновления списка товаров
-    header("Location: cart.php");
-    exit; // Добавлено для завершения выполнения скрипта
-}
-?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <title>PHP веб сайт</title>
 </head>
 <body>
-<?php require "blocks/header.php" ?>
+<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none me-3">
+        <img src="img/iconflutter.svg" alt="Icon" style="max-width: 30px; margin: 10px">
+        <span class="fs-4">SilentSonics</span>
+    </a>
+    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center" style="font-family: Helvetica, sans-serif;">
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="index.php">Главная</a>
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="contacts.php">Контакты</a>
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="support.php">Поддержка</a>
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная система</a>
+        <a href="cart.php" class="mx-2 py-2 link-body-emphasis text-decoration-none">Корзина</a>
+    </nav>
+    <a class="mx-2 btn btn-outline-primary" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</a>
+</div>
+
 <main>
-    <!-- Контент страницы корзины -->
-    <div class="container mt-5">
-        <h3>Ваша корзина</h3>
-        <div class="row">
-            <?php
-            // Получаем данные о товарах из сессии
-            if (isset($_SESSION['cartItems'])) {
-                $cartItems = $_SESSION['cartItems'];
-                // Генерация карточек товаров в корзине
-                foreach ($cartItems as $item) {
-                    echo '
-                        <div class="col">
-                            <div class="card mb-4 rounded-3 shadow-sm">
-                                <div class="card-header py-3">
-                                    <h4 class="my-0 fw-normal">' . $item["name"] . '</h4>
-                                </div>
-                                <div class="card-body">
-                                    <p>' . $item["description"] . '</p>
-                                    <form action="cart.php" method="post">
-                                        <input type="hidden" name="removeItemId" value="' . $item["id"] . '">
-                                        <button type="submit" class="btn btn-danger">Удалить из корзины</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        ';
-                }
-            }
-            ?>
-        </div>
-        <div class="text-center">
-            <button type="button" class="btn btn-primary">Оформить заказ</button>
+    <div class="container">
+        <h2 class="mb-4">Корзина</h2>
+        <div id="cart-content">
+            <!-- Здесь будет отображаться содержимое корзины -->
         </div>
     </div>
 </main>
-<?php require "blocks/footer.php" ?>
+
+<!-- Модальное окно входа -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Логин</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="login.php" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Введите ваш email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Введите ваш пароль" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Функция для загрузки содержимого корзины
+    function loadCartContent() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_cart_content.php');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                document.getElementById('cart-content').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+
+    // Загрузка содержимого корзины при загрузке страницы
+    window.onload = function() {
+        loadCartContent();
+    };
+</script>
 </body>
 </html>

@@ -20,7 +20,7 @@
         <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="index.php">Главная</a>
         <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="contacts.php">Контакты</a>
         <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="support.php">Поддержка</a>
-        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная системvа</a>
+        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная система</a>
         <a href="cart.php" class="mx-2 py-2 link-body-emphasis text-decoration-none">
             <img src="img/cart.svg" alt="basket" style="max-width: 25px;">
         </a>
