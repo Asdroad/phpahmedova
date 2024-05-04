@@ -11,6 +11,7 @@
 </head>
 <body>
 <?php require "blocks/header.php" ?>
+<?php require "blocks/need_auth.php" ?>
 <div class="container mt-5" style="margin-bottom: 20px;">
     <h3>Контактная форма</h3>
     <form action="index.php" method="post">

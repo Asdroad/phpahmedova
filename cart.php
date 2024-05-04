@@ -8,20 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none me-3">
-        <img src="img/iconflutter.svg" alt="Icon" style="max-width: 30px; margin: 10px">
-        <span class="fs-4">SilentSonics</span>
-    </a>
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center" style="font-family: Helvetica, sans-serif;">
-        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="index.php">Главная</a>
-        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="contacts.php">Контакты</a>
-        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="support.php">Поддержка</a>
-        <a class="mx-2 py-2 link-body-emphasis text-decoration-none" href="refsystem.php">Реферальная система</a>
-        <a href="cart.php" class="mx-2 py-2 link-body-emphasis text-decoration-none">Корзина</a>
-    </nav>
-    <a class="mx-2 btn btn-outline-primary" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</a>
-</div>
+<?php require "blocks/header.php" ?>
 
 <main>
     <div class="container">
@@ -29,33 +16,13 @@
         <div id="cart-content">
             <!-- Здесь будет отображаться содержимое корзины -->
         </div>
+        <div id="cart-summary" class="mt-4">
+            <!-- Здесь будет отображаться общая стоимость товаров в корзине -->
+        </div>
     </div>
 </main>
 
-<!-- Модальное окно входа -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Логин</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="login.php" method="post">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Введите ваш email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Пароль</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Введите ваш пароль" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<?php require "blocks/need_auth.php" ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -71,10 +38,44 @@
         xhr.send();
     }
 
+    // Функция для загрузки общей стоимости товаров в корзине
+    function loadCartSummary() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_cart_summary.php');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                document.getElementById('cart-summary').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+
     // Загрузка содержимого корзины при загрузке страницы
     window.onload = function() {
         loadCartContent();
+        loadCartSummary();
     };
+
+    // Функция для добавления товара в корзину
+    function addToCart(itemId, itemName, itemDescription) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'add_to_cart.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Обновляем содержимое корзины и общую стоимость
+                    loadCartContent();
+                    loadCartSummary();
+                    alert('Товар успешно добавлен в корзину!');
+                } else {
+                    alert('Произошла ошибка при добавлении товара в корзину.');
+                }
+            }
+        };
+        xhr.send('itemId=' + itemId + '&itemName=' + encodeURIComponent(itemName) + '&itemDescription=' + encodeURIComponent(itemDescription));
+    }
 </script>
 </body>
 </html>
