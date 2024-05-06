@@ -10,6 +10,7 @@
     <title>Contact Page</title>
 </head>
 <body>
+<?php require "blocks/need_auth.php" ?>
 <?php require "blocks/header.php" ?>
 <div class="container mt-5">
     <h3>Контактная информация</h3>
