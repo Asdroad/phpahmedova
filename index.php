@@ -98,5 +98,33 @@
         xhr.send('itemId=' + itemId + '&itemName=' + encodeURIComponent(itemName) + '&itemDescription=' + encodeURIComponent(itemDescription) + '&itemPrice=' + encodeURIComponent(itemPrice) + '&imageUrl=' + encodeURIComponent(imageUrl)); // Исправлено на imageUrl
     }
 </script>
+<script>
+    // Функция для удаления товара из корзины
+    function removeFromCart(itemId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'remove_from_cart.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Если количество товара больше единицы, отправляем запрос на уменьшение количества на одну единицу
+                    if (response.quantity > 0) {
+                        alert('Количество товара уменьшено на одну единицу. Текущее количество: ' + response.quantity);
+                    } else {
+                        // Если количество товара равно нулю, то удаляем товар полностью
+                        alert('Товар успешно удален из корзины!');
+                    }
+                    // Обновляем содержимое корзины и общую стоимость
+                    loadCartContent();
+                    loadCartSummary();
+                } else {
+                    alert('Произошла ошибка при удалении товара из корзины: ' + response.message);
+                }
+            }
+        };
+        xhr.send('itemId=' + itemId);
+    }
+</script>
 </body>
 </html>

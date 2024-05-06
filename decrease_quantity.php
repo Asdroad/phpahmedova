@@ -8,15 +8,15 @@ if (isset($_POST['itemId'])) {
     if (isset($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $key => $item) {
             if ($item['itemId'] == $itemId) {
-                // Если количество товара больше одного, уменьшаем его на одну единицу
-                // remove_from_cart.php
+                // Если количество товара больше одного, уменьшаем его на единицу
+                // decrease_quantity.php
                 if ($item['quantity'] > 1) {
                     $_SESSION['cart'][$key]['quantity'] -= 1;
-                    echo json_encode(['success' => true, 'quantity' => $_SESSION['cart'][$key]['quantity']]);
+                    echo json_encode(['success' => true]);
                     exit;
                 } else {
                     unset($_SESSION['cart'][$key]);
-                    echo json_encode(['success' => true, 'quantity' => 0]);
+                    echo json_encode(['success' => true]);
                     exit;
                 }
             }
