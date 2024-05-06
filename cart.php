@@ -76,6 +76,27 @@
         };
         xhr.send('itemId=' + itemId + '&itemName=' + encodeURIComponent(itemName) + '&itemDescription=' + encodeURIComponent(itemDescription));
     }
+
+    // Функция для удаления товара из корзины
+    function removeFromCart(itemId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'remove_from_cart.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Обновляем содержимое корзины и общую стоимость
+                    loadCartContent();
+                    loadCartSummary();
+                    alert('Товар успешно удален из корзины!');
+                } else {
+                    alert('Произошла ошибка при удалении товара из корзины.');
+                }
+            }
+        };
+        xhr.send('itemId=' + itemId);
+    }
 </script>
 </body>
 </html>

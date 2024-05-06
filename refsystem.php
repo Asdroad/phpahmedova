@@ -1,5 +1,18 @@
 <?php
-require_once "config.php"; // Подключение к базе данных
+// Подключение к базе данных с использованием PDO
+try {
+    $host = 'localhost:3306'; // Хост базы данных
+    $dbname = 'PHPAHMEDOVA'; // Имя базы данных
+    $username = 'root'; // Имя пользователя базы данных
+    $password = 'babaka456'; // Пароль пользователя базы данных
+
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    // Установка атрибутов PDO
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Ошибка подключения к базе данных: " . $e->getMessage());
+}
 
 $success = false;
 

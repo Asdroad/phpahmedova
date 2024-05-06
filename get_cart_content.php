@@ -6,12 +6,14 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     $cartItems = $_SESSION['cart'];
 
     // Выводим содержимое корзины
-    foreach ($cartItems as $itemId) {
-        // Здесь можно выполнить запрос к базе данных для получения информации о товаре
-        // Например: SELECT * FROM products WHERE id = $itemId
-
-        // Выводим информацию о товаре (замените на свой код вывода)
-        echo "<p>Товар с ID $itemId</p>";
+    foreach ($cartItems as $item) {
+        // Выводим информацию о товаре
+        echo "<p>Товар: {$item['itemName']}</p>";
+        echo "<img src='{$item['itemImage']}' alt='{$item['itemName']}' style='max-width: 200px;'>";
+        echo "<p>Описание: {$item['itemDescription']}</p>";
+        echo "<p>Цена: {$item['itemPrice']}</p>";
+        echo "<button class='btn btn-danger' onclick='removeFromCart({$item['itemId']})'>Удалить</button>"; // Добавленная кнопка удаления
+        echo "<hr>";
     }
 } else {
     // Выводим сообщение, если корзина пуста
