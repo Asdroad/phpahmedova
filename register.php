@@ -21,18 +21,11 @@ $password = $_POST['registerPassword'];
 // Хэширование пароля
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// SQL запрос для вставки данных в таблицу пользователей
-$sql = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$hashed_password')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Регистрация прошла успешно!";
-
+$stmt = $conn->prepare("INSERT INTO Users (username, email, password) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $username, $email , $hashed_password);
+if ($stmt->execute()) {
+    echo "success";
 } else {
-    echo "Ошибка при регистрации: " . $conn->error;
+    echo $stmt->error;
 }
-
-// Закрытие соединения
-$conn->close();
-header("Location: index.php");
-exit;
 ?>

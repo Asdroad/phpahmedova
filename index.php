@@ -78,10 +78,27 @@
     </footer>
 </main>
 
+<!-- Модальное окно -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Реферальный код</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Ваш реферальный код введен корректно. Скидка будет применена.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function addToCart(itemId, itemName, itemDescription, itemPrice, imageUrl) {
-        // Отправляем AJAX-запрос на сервер
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'add_to_cart.php');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -95,7 +112,7 @@
                 }
             }
         };
-        xhr.send('itemId=' + itemId + '&itemName=' + encodeURIComponent(itemName) + '&itemDescription=' + encodeURIComponent(itemDescription) + '&itemPrice=' + encodeURIComponent(itemPrice) + '&imageUrl=' + encodeURIComponent(imageUrl)); // Исправлено на imageUrl
+        xhr.send('itemId=' + itemId + '&itemName=' + encodeURIComponent(itemName) + '&itemDescription=' + encodeURIComponent(itemDescription) + '&itemPrice=' + encodeURIComponent(itemPrice) + '&imageUrl=' + encodeURIComponent(imageUrl));
     }
 </script>
 <script>
@@ -125,6 +142,15 @@
         };
         xhr.send('itemId=' + itemId);
     }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var myModal = new bootstrap.Modal(document.getElementById("myModal"));
+        <?php if ($success): ?>
+        myModal.show();
+        <?php endif; ?>
+    });
 </script>
 </body>
 </html>

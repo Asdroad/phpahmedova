@@ -8,10 +8,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="register.php" method="post">
+                <form id="reg" action="register.php" method="post">
                     <div class="mb-3">
                         <label for="registerEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="registerEmail" name="registerEmail" placeholder="Введите ваш email" required>
+                        <input type="text" class="form-control" id="registerEmail" name="registerEmail" placeholder="Введите ваш email" required>
                     </div>
                     <div class="mb-3">
                         <label for="registerUsername" class="form-label">Логин</label>
@@ -52,6 +52,12 @@
         </div>
     </div>
 </div>
+<div id="modal_err" class="modal fade">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modal_error"></p>
+    </div>
+</div>
 <?php
 session_start();
 if (!isset($_SESSION['user_name'])) {
@@ -73,4 +79,34 @@ if (!isset($_SESSION['user_name'])) {
             registerModal.modal('show');
         });
     });
+
 </script>
+<script>
+    $(document).ready(function() {
+        $('#reg').on('submit', function(event) {
+            event.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: 'register.php',
+                data: formData,
+                success: function(response) {
+                    if (response === 'success') {
+                       alert('Регистрация прошла успешно!');
+                    } else {
+                        alert(response);
+
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Обработка ошибок AJAX запроса
+                    console.error(xhr.responseText);
+                    // Здесь можно выполнить какие-то действия, например, показать сообщение об ошибке
+                }
+            });
+        });
+    });
+</script>
+
